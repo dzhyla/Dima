@@ -1,0 +1,7 @@
+if (ctx.action!='create'){
+    var button=document.querySelector('a[data-action="create_recs"]');
+    var field=document.querySelector('#edit_record > div.inputs.clearfix > table:nth-child(3) > tbody > tr > td > table > tbody > tr.body > td');
+    field.appendChild(button);
+    button = $('a[data-action="notify"]');
+    $('#edit_record > div.inputs.clearfix > table:nth-child(1) > tbody > tr.body > td > table > tbody > tr.body > td > div.input.clearfix.custom_boolean.optional.record_mom.js-mom-field').append(button);
+}
