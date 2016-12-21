@@ -1,32 +1,4 @@
-# Dima
-evo
-//utils.addLogRecord("Transfer started, system status = "+ctx.instance.getValueByField('system_status'),0)
-if (ctx.instance.getValueByField('system_status') == 1){
-    //utils.addLogRecord("If - ok",0)
-    var fieldValue = '';
-    var today = new Date();
-    var deployResponce = ctx.instance.getValueByField('deploy_responce');
-    
-    var data = '\'{';
-    var fields = ['requestor','streamline','jruby_gui_branch','ruby_gui_branch','app_server_branch','db_save_current','db_expiration_date','db_action',
-    'db_source','db_take_from','db_previously_saved','copy_media','db_custom_action'];
-    
-    for (var i in fields){
-        if (!utils.isEmpty(ctx.instance.getValueByField(fields[i]))){
-            fieldValue = ctx.instance.getValueByField(fields[i]);
-                data += '\"' + fields[i] + '\":\"' + fieldValue + '\",';
-                
-        }
-    }
-    data = data.slice(0,-1);
-    data += '}\'';
-    
-    //redmine_user   Xms9Ru64udVXfDb3
-    //utils.addLogRecord('test1',0)
-    var url = " http://openvpn.srv-002.nasc.dn:12354/redmine_deploy_request/";
-    var cmd = "curl -X POST --user redmine_user:Xms9Ru64udVXfDb3 --data " + data + " " + url;
-    var cmd_result = utils.cmd.run(cmd);
-    ctx.instance.setValueToField('system_status', 2);
+
     //utils.addLogRecord("Result = "+cmd_result,0)
     var resp = JSON.parse(cmd_result);
     if (resp.status == 'OK'){
@@ -48,3 +20,4 @@ if (ctx.instance.getValueByField('system_status') == 1){
     ctx.instance.setValueToField('last_updated_at',new Date());
     ctx.instance.save();
 }
+
